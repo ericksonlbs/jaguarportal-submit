@@ -69,7 +69,7 @@ echo "INPUT_JAGUARPORTALHOSTNAME: $INPUT_JAGUARPORTALHOSTNAME"
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/jaguarportal submit /k:\"${INPUT_JAGUARPORTALPROJECTKEY}\" /n:\"${INPUT_JAGUARPORTALPROJECTNAME}\" /d:jaguarportal.apikey=\"${JAGUARPORTAL_APIKEY}\" /d:jaguarportal.host.url=\"${INPUT_JAGUARPORTALHOSTNAME}\""
+jaguarportal_cmd="/jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${JAGUARPORTAL_APIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTNAME}\""
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
@@ -84,7 +84,7 @@ if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     PR_NUMBER=$(echo "$GITHUB_REF" | awk 'BEGIN { FS = "/" } ; { print $3 }')
 
     # Add pull request specific parameters
-    jaguarportal_cmd="$jaguarportal_cmd /d:jaguarportal.pullrequest.key=$PR_NUMBER /d:jaguarportal.pullrequest.branch=$GITHUB_HEAD_REF /d:jaguarportal.pullrequest.base=$GITHUB_BASE_REF /d:jaguarportal.pullrequest.github.repository=$GITHUB_REPOSITORY /d:jaguarportal.pullrequest.provider=github"
+    jaguarportal_cmd="$jaguarportal_cmd --prKey=$PR_NUMBER --prBranch=$GITHUB_HEAD_REF --prBase=$GITHUB_BASE_REF --prRepository=$GITHUB_REPOSITORY --prProvider=github"
 
 fi
 
