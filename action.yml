@@ -1,0 +1,23 @@
+name: "jaguarportal-submit"
+description: "Submit result analysis SBFL to Jaguar Portal"
+author: "ericksonlbs"
+
+inputs:
+  jaguarPortalProjectKey:
+    description: "The key of the Jaguar Portal project"
+    required: true
+  jaguarPortalProjectName:
+    description: "The name of the Jaguar Portal project"
+    required: true
+  jaguarPortalHostname:
+    description: "The Jaguar Portal server URL"
+    default: "https://jaguarportalcloud.io"
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: 'check-square'
+  color: 'blue'
