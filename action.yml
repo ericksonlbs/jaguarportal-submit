@@ -11,12 +11,15 @@ inputs:
     required: true
   jaguarPortalHostUrl:
     description: "The Jaguar Portal server URL"
-    default: "https://jaguarportalcloud.io"
+    default: https://jaguarportalcloud.io
     required: true
   jaguarPortalAPIKey:
     description: "The APIKey from Jaguar Portal"
     required: true
-
+  jaguarPortalPathAnalisys:
+    description: "The path analisys"
+    required: true
+    default: /target/.jaguar
 runs:
   using: "docker"
   image: "Dockerfile"
