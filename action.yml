@@ -9,7 +9,7 @@ inputs:
   jaguarPortalProjectName:
     description: "The name of the Jaguar Portal project"
     required: true
-  jaguarPortalHostname:
+  jaguarPortalHostUrl:
     description: "The Jaguar Portal server URL"
     default: "https://jaguarportalcloud.io"
     required: true
