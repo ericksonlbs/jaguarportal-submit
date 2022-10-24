@@ -13,6 +13,9 @@ inputs:
     description: "The Jaguar Portal server URL"
     default: "https://jaguarportalcloud.io"
     required: true
+  jaguarPortalAPIKey:
+    description: "The APIKey from Jaguar Portal"
+    required: true
 
 runs:
   using: "docker"
