@@ -20,7 +20,7 @@ fi
 echo "Github Action input parameters"
 echo "INPUT_JAGUARPORTALPROJECTKEY: $INPUT_JAGUARPORTALPROJECTKEY"
 echo "INPUT_JAGUARPORTALPROJECTNAME: $INPUT_JAGUARPORTALPROJECTNAME"
-echo "INPUT_JAGUARPORTALHOSTNAME: $INPUT_JAGUARPORTALHOSTNAME"
+echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 
 # Environment variables that need to be mapped in Github Action 
 #     env:
@@ -52,7 +52,7 @@ echo "INPUT_JAGUARPORTALHOSTNAME: $INPUT_JAGUARPORTALHOSTNAME"
 # Simulate Github Action input variables  
 # export INPUT_JAGUARPORTALPROJECTKEY="your_projectkey"
 # export INPUT_JAGUARPORTALPROJECTNAME="your_projectname"
-# export INPUT_JAGUARPORTALHOSTNAME="https://jaguarportalcloud.io"
+# export INPUT_JAGUARPORTALHOSTURL="https://jaguarportalcloud.io"
 
 # Simulate Github Action built-in environment variables
 # export GITHUB_REPOSITORY=theowner/therepo
@@ -64,12 +64,12 @@ echo "INPUT_JAGUARPORTALHOSTNAME: $INPUT_JAGUARPORTALHOSTNAME"
 # Build local Docker image
 # docker build -t jaguarportal-submit .
 # Execute Docker container
-# docker run --name jaguarportal-submit --workdir /github/workspace --rm -e INPUT_JAGUARPORTALPROJECTKEY -e INPUT_JAGUARPORTALPROJECTNAME -e INPUT_JAGUARPORTALHOSTNAME -e JAGUARPORTAL_APIKEY -e GITHUB_EVENT_NAME -e GITHUB_REPOSITORY -e GITHUB_REF -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -v "/var/run/docker.sock":"/var/run/docker.sock" -v $(pwd):"/github/workspace" jaguarportal-submit
+# docker run --name jaguarportal-submit --workdir /github/workspace --rm -e INPUT_JAGUARPORTALPROJECTKEY -e INPUT_JAGUARPORTALPROJECTNAME -e INPUT_JAGUARPORTALHOSTURL -e JAGUARPORTAL_APIKEY -e GITHUB_EVENT_NAME -e GITHUB_REPOSITORY -e GITHUB_REF -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -v "/var/run/docker.sock":"/var/run/docker.sock" -v $(pwd):"/github/workspace" jaguarportal-submit
 
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${JAGUARPORTAL_APIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTNAME}\""
+jaguarportal_cmd="/jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${JAGUARPORTAL_APIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\""
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then

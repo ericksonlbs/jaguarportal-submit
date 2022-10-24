@@ -11,7 +11,7 @@ LABEL "maintainer"="Erickson Lima"
 
 # Version numbers of used software
 ENV DOTNETCORE_RUNTIME_VERSION=6.0 \
-    JAGUARPORTAL_SUBMIT_DOTNET_TOOL_VERSION=1.0
+    JAGUARPORTAL_SUBMIT_DOTNET_TOOL_VERSION=0.0.2
 
 # Add Microsoft Debian apt-get feed 
 RUN wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
