@@ -11,8 +11,8 @@ if [ -z "$INPUT_JAGUARPORTALPROJECTNAME" ]; then
     echo "Input parameter jaguarPortalProjectName is required"
     exit 1
 fi
-if [ -z "$JAGUARPORTAL_APIKEY" ]; then
-    echo "Environment parameter JAGUARPORTAL_APIKEY is required"
+if [ -z "$INPUT_JAGUARPORTALAPIKEY" ]; then
+    echo "Input parameter jaguarPortalAPIKey is required"
     exit 1
 fi
 
@@ -22,11 +22,8 @@ echo "INPUT_JAGUARPORTALPROJECTKEY: $INPUT_JAGUARPORTALPROJECTKEY"
 echo "INPUT_JAGUARPORTALPROJECTNAME: $INPUT_JAGUARPORTALPROJECTNAME"
 echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 
-# Environment variables that need to be mapped in Github Action 
-#     env:
-#       JAGUARPORTAL_APIKEY: ${{ secrets.JAGUARPORTAL_APIKEY }}
-#
-# JAGUARPORTAL_APIKEY=[your_apikey_from_jaguarportal]
+# Use APIKey with secretes on Github Action 
+#       jaguarPortalAPIKey: ${{ secrets.JAGUARPORTAL_APIKEY }}
 
 # Environment variables automatically set by Github Actions automatically passed on to the docker container
 #
@@ -69,7 +66,7 @@ echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${JAGUARPORTAL_APIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\""
+jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${INPUT_JAGUARPORTALAPIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\""
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
