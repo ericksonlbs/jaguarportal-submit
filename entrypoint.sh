@@ -96,3 +96,14 @@ echo "Shell commands"
 #Run command
 echo "jaguarportal_cmd: $jaguarportal_cmd"
 sh -c "$jaguarportal_cmd"
+
+echo 'ls /github'
+ls /github
+echo 'ls /github/file_commands'
+ls /github/file_commands
+echo 'ls /github/home'
+ls /github/home
+echo 'ls /github/workflow'
+ls /github/workflow
+echo 'ls /github/workspace'
+ls /github/workspace
