@@ -75,10 +75,10 @@ jaguarportal_cmd="/jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${IN
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     # JaguarPortal wants these variables if build is started for a pull request
     # JaguarPortal parameters: https://github.com/ericksonlbs/JaguarPortal/wiki/API-Documentation/
-    # jaguarportal.pullrequest.key	                Unique identifier of your PR. Must correspond to the key of the PR in GitHub or TFS. E.G.: 5
-    # jaguarportal.pullrequest.branch	            The name of your PR Ex: feature/my-new-feature
-    # jaguarportal.pullrequest.base	                The long-lived branch into which the PR will be merged. Default: master E.G.: master
-    # jaguarportal.pullrequest.github.repository	SLUG of the GitHub Repo (owner/repo)
+    # prKey	                Unique identifier of your PR. Must correspond to the key of the PR in GitHub or TFS. E.G.: 5
+    # prBranch	            The name of your PR Ex: feature/my-new-feature
+    # prBase	                The long-lived branch into which the PR will be merged. Default: master E.G.: master
+    # prRepository	SLUG of the GitHub Repo (owner/repo)
 
     # Extract Pull Request numer from the GITHUB_REF variable
     PR_NUMBER=$(echo "$GITHUB_REF" | awk 'BEGIN { FS = "/" } ; { print $3 }')
