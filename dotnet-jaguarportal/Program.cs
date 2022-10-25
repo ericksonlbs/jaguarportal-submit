@@ -17,10 +17,11 @@ namespace dotnetJaguarPortal
 
                       if (o.SBFLPathResult != null)
                       {
-                          if (File.Exists(o.SBFLPathResult))
-                              Console.WriteLine(File.ReadAllText(o.SBFLPathResult));
+                          string file = Path.Combine(o.SBFLPathResult, "control-flow.xml");
+                          if (File.Exists(file))
+                              Console.WriteLine(File.ReadAllText(file));
                           else
-                              Console.WriteLine($"File not found: {o.SBFLPathResult}");
+                              Console.WriteLine($"File not found: {file}");
                       }
 
                       Console.WriteLine($"End project: '{o.ProjectName}'");
