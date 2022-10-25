@@ -4,13 +4,6 @@ namespace dotnet_jaguarportal
 {
     internal class Options
     {
-
-        [Option("submit", Required = false, Group = "action", HelpText = "Perform action submit.")]
-        public bool Submit { get; set; }
-
-        [Option("prepare", Required = false, Group = "action", HelpText = "Perform action prepare.")]
-        public bool Prepare { get; set; }
-
         [Option('p', "projectKey", Required = true, HelpText = "Set Project Key from your project in JaguarPortal.")]
         public string? ProjectKey { get; set; }
 
@@ -41,6 +34,7 @@ namespace dotnet_jaguarportal
         [Option('v', "verbose", Required = false, HelpText = "Set verbose log enable.")]
         public bool Verbose { get; set; }
 
+        [Option('j', "pathResult", Required = false, HelpText = "Set SBFL path result.")]
+        public string? SBFLPathResult { get; set; }
     }
-
 }
