@@ -25,8 +25,14 @@ RUN apt-get update -y \
     && apt-get update -y \
     && apt-get install --no-install-recommends -y aspnetcore-runtime-$DOTNETCORE_RUNTIME_VERSION
 
+
+ADD dotnet-jaguarportal /home/dotnet-jaguarportal
+
+# build jaguarportal-submit tool
+RUN dotnet build /home/dotnet-jaguarportal/dotnet-jaguarportal.csproj -c Release
+
 # Install .NET global tool
-RUN dotnet tool install --global dotnet-jaguarportal --version $JAGUARPORTAL_SUBMIT_DOTNET_TOOL_VERSION
+RUN dotnet tool install dotnet-jaguarportal -g --add-source /home/dotnet-jaguarportal/bin/Release/ --version 1.0.0
 
 # Cleanup
 RUN apt-get -q -y autoremove \

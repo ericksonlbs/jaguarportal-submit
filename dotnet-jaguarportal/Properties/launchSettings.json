@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "dotnet-jaguarportal": {
+      "commandName": "Project",
+      "commandLineArgs": "--prepare -p MeuTeste -n \"Meu Teste\" -k ABDC1234 -h \"http://localhost:5001\" --prKey 123456 -v"
+    }
+  }
+}
