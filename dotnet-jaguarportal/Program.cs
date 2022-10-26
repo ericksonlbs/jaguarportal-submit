@@ -1,31 +1,58 @@
 ﻿using CommandLine;
 using dotnet_jaguarportal;
-using System.Text.Json;
+using dotnet_jaguarportal.JaguarPortal.Interfaces;
+using dotnet_jaguarportal.JaguarPortal.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace dotnetJaguarPortal
+namespace dotnet_jaguarportal
 {
-    public class Program
+    internal class App
     {
-        public static void Main(string[] args)
+        private readonly ILogger<App> _logger;
+        private readonly IJaguarPortalService _service;
+        private readonly ParserResult<CommandLineParameters> _parserResult;
+
+        public App(ILogger<App> logger, IJaguarPortalService service, ParserResult<CommandLineParameters> parserResult)
         {
-            var parserResult = Parser.Default.ParseArguments<Options>(args)
-                  .WithParsed(o =>
-                  {
-                      Console.WriteLine($"Start project: '{o.ProjectName}'");
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _service = service;
+            _parserResult = parserResult;
+        }
 
-                      Console.WriteLine($"Parameters: {JsonSerializer.Serialize(o)}");
-
-                      if (o.SBFLPathResult != null)
-                      {
-                          string file = Path.Combine(o.SBFLPathResult, "control-flow.xml");
-                          if (File.Exists(file))
-                              Console.WriteLine(File.ReadAllText(file));
-                          else
-                              Console.WriteLine($"File not found: {file}");
-                      }
-
-                      Console.WriteLine($"End project: '{o.ProjectName}'");
-                  });
+        public async Task Run()
+        {
+            if (_parserResult.Errors.Count() == 0)
+            {
+                await _service.SendAnalisysControlFlow();
+            }
         }
     }
 }
+//public class Program
+//{
+//    public static void Main(string[] args)
+//    {
+
+//        //setup our DI
+//        var serviceProvider = new ServiceCollection()
+//            .AddSingleton(o =>
+//            {
+//                return Parser.Default.ParseArguments<OptionsCommandLine>(args)
+//                                     .WithParsed(o => { }).Value;
+//            })
+//            .AddScoped<IJaguarPortalService, JaguarPortalService>()
+//            .AddHttpClient()
+//            .BuildServiceProvider();
+
+
+
+//        var service = serviceProvider.GetService<IJaguarPortalService>();
+
+//        //services.Configure<MongoDatabaseSettings>(Configuration.GetSection("MongoDatabaseSettings"));
+
+//        service.SendAnalisysControlFlow(new AnalysisControlFlowNewModel()).GetAwaiter().GetResult();
+//    }
+//}
