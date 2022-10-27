@@ -66,7 +66,7 @@ echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${INPUT_JAGUARPORTALAPIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALISYSPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALTARGETPATH\""
+jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -n \"${INPUT_JAGUARPORTALPROJECTNAME}\" -k \"${INPUT_JAGUARPORTALAPIKEY}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALISYSPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALSOURCEPATH\""
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
