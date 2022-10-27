@@ -25,7 +25,6 @@ inputs:
     required: true
     default: /target/src/main/java
     
-    ANALISYS
 runs:
   using: "docker"
   image: "Dockerfile"
