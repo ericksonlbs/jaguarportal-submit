@@ -20,10 +20,10 @@ inputs:
     description: "The analisys path"
     required: true
     default: /target/.jaguar    
-  jaguarPortalClassesPath:
-    description: "The classes path"
+  jaguarPortalSourcePath:
+    description: "The source path"
     required: true
-    default: /target/src/main/java
+    default: /src/main/java
     
 runs:
   using: "docker"
