@@ -3,10 +3,8 @@ using dotnet_jaguarportal;
 using dotnet_jaguarportal.Jaguar.Interfaces;
 using dotnet_jaguarportal.JaguarPortal.Interfaces;
 using dotnet_jaguarportal.JaguarPortal.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 static void ConfigureServices(IServiceCollection services, string[] args)
 {

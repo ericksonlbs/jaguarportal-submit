@@ -31,10 +31,10 @@ namespace dotnet_jaguarportal
         [Option("prProvider", Required = false, HelpText = "Set Pull Request Provider (default: github).", Default = "github")]
         public string? PullRequestProvider { get; set; }
 
-        [Option('v', "verbose", Required = false, HelpText = "Set verbose log enable.")]
-        public bool Verbose { get; set; }
-
         [Option('j', "pathResult", Required = false, HelpText = "Set SBFL path result.")]
         public string? SBFLPathResult { get; set; }
+        
+        [Option('t', "pathTarget", Required = true, HelpText = "Set path target classes.")]
+        public string? PathTarget { get; set; }
     }
 }
