@@ -16,10 +16,16 @@ inputs:
   jaguarPortalAPIKey:
     description: "The APIKey from Jaguar Portal"
     required: true
-  jaguarPortalPathAnalisys:
-    description: "The path analisys"
+  jaguarPortalAnalisysPath:
+    description: "The analisys path"
     required: true
-    default: /target/.jaguar
+    default: /target/.jaguar    
+  jaguarPortalClassesPath:
+    description: "The classes path"
+    required: true
+    default: /target/src/main/java
+    
+    ANALISYS
 runs:
   using: "docker"
   image: "Dockerfile"
