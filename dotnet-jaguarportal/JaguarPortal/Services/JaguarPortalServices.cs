@@ -93,9 +93,9 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                 sb.AppendLine("Ranking SBFL");
                 foreach (Jaguar2Model item in obj.OrderByDescending(x => x.SuspiciousValue))
                 {
-                    sb.AppendLine($"{item}");
+                    sb.Append($"{item}\n");
                 }
-                string notice = $"::notice title=SBFL::\"{sb}\"";
+                string notice = $"::notice title=SBFL::{sb}";
                 Console.WriteLine(notice);
             }
         }
