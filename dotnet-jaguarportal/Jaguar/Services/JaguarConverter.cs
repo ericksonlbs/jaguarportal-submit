@@ -1,4 +1,4 @@
-﻿using dotnet_jaguarportal.Jaguar.Interfaces;
+﻿using dotnet_jaguarportal.Interfaces;
 using dotnet_jaguarportal.JaguarPortal.Models;
 using Microsoft.Extensions.Logging;
 using System;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dotnet_jaguarportal.Jaguar.Interfaces
+namespace dotnet_jaguarportal.Interfaces
 {
    
     public interface IJaguarPortalConverter<T>

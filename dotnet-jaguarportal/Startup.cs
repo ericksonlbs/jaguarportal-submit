@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 using dotnet_jaguarportal;
-using dotnet_jaguarportal.Jaguar.Interfaces;
+using dotnet_jaguarportal.Interfaces;
 using dotnet_jaguarportal.JaguarPortal.Interfaces;
 using dotnet_jaguarportal.JaguarPortal.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +28,13 @@ static void ConfigureServices(IServiceCollection services, string[] args)
     });
 
     services.AddScoped<IJaguarPortalService, JaguarPortalService>();
+
     services.AddScoped<IJaguarPortalConverter<dotnet_jaguarportal.Jaguar.Models.FlatFaultClassification>,
         dotnet_jaguarportal.Jaguar.Services.JaguarConverter>();
+
+    services.AddScoped<IJaguarPortalConverter<List<dotnet_jaguarportal.Jaguar2.Models.Jaguar2Model>>,
+        dotnet_jaguarportal.Jaguar2.Services.Jaguar2Converter>();
+
     services.AddHttpClient();
     // add app
     services.AddTransient<App>();

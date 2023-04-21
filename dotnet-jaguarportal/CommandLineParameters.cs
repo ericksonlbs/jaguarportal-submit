@@ -36,5 +36,8 @@ namespace dotnet_jaguarportal
         
         [Option('t', "pathTarget", Required = true, HelpText = "Set path target classes.")]
         public string? PathTarget { get; set; }
+
+        [Option('f', "formatSBFLFile", Required = false, HelpText = "Set format SBFL File (CSV or XML) (default: CSV).", Default = "CSV")]
+        public string? FormatSBFLFile { get; set; }
     }
 }

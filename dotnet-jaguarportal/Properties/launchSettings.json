@@ -2,7 +2,7 @@
   "profiles": {
     "dotnet-jaguarportal": {
       "commandName": "Project",
-      "commandLineArgs": "-p MeuTeste -n \"Meu Teste\" -k ABCD1234 -h \"https://jaguarportal-api.azurewebsites.net/\" --prKey 123456 -v -j C:\\git\\ericksonlbs\\JaguarIMC\\br.usp.each.saeg.jaguar.example\\.jaguar"
+      "commandLineArgs": "-p MeuTeste -n \"Meu Teste\" -k ABCD1234 -h \"https://jaguarportal-api.azurewebsites.net/\" --prKey 123456 -j C:\\temp\\test -t C:\\temp\\test"
     }
   }
 }
