@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
@@ -71,13 +72,22 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                 List<Jaguar2Model> obj = new();
 
                 foreach (var line in File.ReadAllLines(item))
-                    obj.Add(new Jaguar2Model(line));                
-                                
+                {
+                    Jaguar2Model lineObj = new Jaguar2Model(line);
+
+                    //string notice = $"::notice file={lineObj.FileName},line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious-{lineObj.SuspiciousValue}::{JsonSerializer.Serialize(lineObj)}";
+                    string notice = $"::notice file={lineObj.FullName}.java,line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious::Suspecious Text Message";
+                    Console.WriteLine(notice);
+
+                    obj.Add(lineObj);
+                }
+
                 if (obj != null)
                 {
                     AnalysisControlFlowNewModel analyse = converterCSV.Convert(obj, parameters.ProjectKey);
                     return _client.AnalysisControlFlowAsync(analyse);
                 }
+
             }
             return Task.CompletedTask;
         }
