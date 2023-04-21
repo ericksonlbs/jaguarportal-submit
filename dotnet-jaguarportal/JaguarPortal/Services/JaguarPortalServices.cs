@@ -76,7 +76,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                     Jaguar2Model lineObj = new Jaguar2Model(line);
 
                     //string notice = $"::notice file={lineObj.FileName},line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious-{lineObj.SuspiciousValue}::{JsonSerializer.Serialize(lineObj)}";
-                    string notice = $"::notice file={lineObj.FullName}.java,line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious::Suspecious Text Message";
+                    string notice = $"::notice file={parameters.PathTarget}{lineObj.FullName}.java,line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious::Suspecious Text Message";
                     Console.WriteLine(notice);
 
                     obj.Add(lineObj);
