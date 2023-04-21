@@ -33,7 +33,10 @@ namespace dotnet_jaguarportal
 
         [Option('j', "pathResult", Required = false, HelpText = "Set SBFL path result.")]
         public string? SBFLPathResult { get; set; }
-        
+
+        [Option('l', "pathLocal", Required = true, HelpText = "Set local path project.")]
+        public string? LocalPath { get; set; }
+
         [Option('t', "pathTarget", Required = true, HelpText = "Set path target classes.")]
         public string? PathTarget { get; set; }
 

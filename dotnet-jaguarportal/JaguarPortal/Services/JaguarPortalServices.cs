@@ -72,24 +72,32 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                 List<Jaguar2Model> obj = new();
 
                 foreach (var line in File.ReadAllLines(item))
-                {
-                    Jaguar2Model lineObj = new Jaguar2Model(line);
-
-                    //string notice = $"::notice file={lineObj.FileName},line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious-{lineObj.SuspiciousValue}::{JsonSerializer.Serialize(lineObj)}";
-                    string notice = $"::warning file=./src/main/java/{lineObj.FullName}.java,line={lineObj.NumberLine},endLine={lineObj.NumberLine},title=Suspecious::Suspecious Text Message2 [See file](src/main/java/{lineObj.FullName}.java)";
-                    Console.WriteLine(notice);
-
-                    obj.Add(lineObj);
-                }
+                    obj.Add(new Jaguar2Model(line));
 
                 if (obj != null)
                 {
                     AnalysisControlFlowNewModel analyse = converterCSV.Convert(obj, parameters.ProjectKey);
+                    Notice(obj);
                     return _client.AnalysisControlFlowAsync(analyse);
                 }
 
             }
             return Task.CompletedTask;
+        }
+
+        private void Notice(List<Jaguar2Model> obj)
+        {
+            if (obj != null && obj.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Ranking SBFL");
+                foreach (Jaguar2Model item in obj.OrderByDescending(x => x.SuspiciousValue))
+                {
+                    sb.AppendLine($"{item}");
+                }
+                string notice = $"::notice title=SBFL::{sb}";
+                Console.WriteLine(notice);
+            }
         }
     }
 }
