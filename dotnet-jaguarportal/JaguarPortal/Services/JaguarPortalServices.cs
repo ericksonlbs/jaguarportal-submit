@@ -91,7 +91,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             {
                 foreach (Jaguar2Model item in obj.OrderByDescending(x => x.SuspiciousValue))
                 {
-                    string notice = $"::notice title={item.SuspiciousValue} - {parameters?.LocalPath}/{item.FullName} - Line: {item.NumberLine})::{parameters?.LocalPath}/{item.FullName} CEF:{item.CEF} CEP:{item.CEP} CNF:{item.CNF} CPN:{item.CNP}";
+                    string notice = $"::notice title={item.SuspiciousValue} - {parameters?.LocalPath}/{item.FullName} - Line: {item.NumberLine} (SBFL RANKING)::{parameters?.LocalPath}/{item.FullName} CEF:{item.CEF} CEP:{item.CEP} CNF:{item.CNF} CPN:{item.CNP}";
                     Console.WriteLine(notice);
                 }
             }
