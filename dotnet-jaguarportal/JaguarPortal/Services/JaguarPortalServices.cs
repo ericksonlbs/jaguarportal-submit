@@ -89,14 +89,11 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
         {
             if (obj != null && obj.Count > 0)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("Ranking SBFL");
                 foreach (Jaguar2Model item in obj.OrderByDescending(x => x.SuspiciousValue))
                 {
-                    sb.Append($"{item.ToString()}");
+                    string notice = $"::notice title=Ranking SBFL ({item})::CEF:{item.CEF} CEP:{item.CEP} CNF:{item.CNF} CPN:{item.CNP}";
+                    Console.WriteLine(notice);
                 }
-                string notice = $"::notice title=SBFL::{sb}";
-                Console.WriteLine(notice);
             }
         }
     }
