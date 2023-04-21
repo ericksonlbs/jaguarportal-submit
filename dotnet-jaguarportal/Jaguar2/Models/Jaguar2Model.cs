@@ -79,10 +79,5 @@ namespace dotnet_jaguarportal.Jaguar2.Models
             if (splited.Length > 7)
                 FileName = splited[7];
         }
-
-        public override string ToString()
-        {
-            return $"{SuspiciousValue} - {FullName} - Line: {NumberLine}";
-        }
     }
 }
