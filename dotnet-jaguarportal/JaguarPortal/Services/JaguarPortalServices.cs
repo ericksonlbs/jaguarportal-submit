@@ -90,7 +90,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             if (obj != null && obj.Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("Ranking SBFL");
+                sb.AppendLine("Ranking SBFL\n");
                 foreach (Jaguar2Model item in obj.OrderByDescending(x => x.SuspiciousValue))
                 {
                     sb.Append($"{item}\n");
