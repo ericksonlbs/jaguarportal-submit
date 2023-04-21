@@ -95,7 +95,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                 {
                     sb.AppendLine($"{item}");
                 }
-                string notice = $"::notice title=\"SBFL::{sb}\"";
+                string notice = $"::notice title=SBFL::\"{sb}\"";
                 Console.WriteLine(notice);
             }
         }
