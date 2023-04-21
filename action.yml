@@ -19,7 +19,7 @@ inputs:
   jaguarPortalAnalisysPath:
     description: "The analisys path"
     required: true
-    default: /target/.jaguar    
+    default: /target
   jaguarPortalSourcePath:
     description: "The source path"
     required: true
