@@ -1,81 +1,104 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "JaguarWebAPI",
-    "version": "v1"
+    "title": "WebJaguarPortal",
+    "version": "1.0"
   },
   "paths": {
-    "/AnalysisControlFlow": {
-      "get": {
+    "/api/Analyzes": {
+      "post": {
         "tags": [
-          "AnalysisControlFlow"
+          "Analyzes"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                  }
+                  "$ref": "#/components/schemas/AnalysisControlFlowResponseModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                  }
+                  "$ref": "#/components/schemas/AnalysisControlFlowResponseModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                  }
+                  "$ref": "#/components/schemas/AnalysisControlFlowResponseModel"
                 }
               }
             }
           }
         }
-      },
+      }
+    },
+    "/api/Analyzes/{id}/Finalize": {
       "post": {
         "tags": [
-          "AnalysisControlFlow"
+          "Analyzes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowNewModel"
+                "$ref": "#/components/schemas/FinalizeAnalysisModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowNewModel"
+                "$ref": "#/components/schemas/FinalizeAnalysisModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowNewModel"
+                "$ref": "#/components/schemas/FinalizeAnalysisModel"
               }
             }
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Success"
           }
         }
       }
     },
-    "/AnalysisControlFlow/{id}": {
-      "get": {
+    "/api/Analyzes/{id}/Class": {
+      "post": {
         "tags": [
-          "AnalysisControlFlow"
+          "Analyzes"
         ],
         "parameters": [
           {
@@ -83,66 +106,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorsModel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorsModel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorsModel"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnalysisControlFlowModel"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AnalysisControlFlow"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -150,17 +115,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+                "$ref": "#/components/schemas/ClassAnalysisModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+                "$ref": "#/components/schemas/ClassAnalysisModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AnalysisControlFlowModel"
+                "$ref": "#/components/schemas/ClassAnalysisModel"
               }
             }
           }
@@ -170,25 +135,104 @@
             "description": "Success"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/api/Token": {
+      "post": {
         "tags": [
-          "AnalysisControlFlow"
+          "Token"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "grant_type": {
+                  "style": "form"
+                },
+                "client_id": {
+                  "style": "form"
+                },
+                "client_secret": {
+                  "style": "form"
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenModelResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenModelResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenModelResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenErrorModelResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -196,7 +240,63 @@
   },
   "components": {
     "schemas": {
-      "LineAnalyze": {
+      "AnalysisControlFlowModel": {
+        "type": "object",
+        "properties": {
+          "projectKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnalysisControlFlowResponseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClassAnalysisModel": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineAnalysisModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FinalizeAnalysisModel": {
+        "type": "object",
+        "properties": {
+          "messageError": {
+            "type": "string",
+            "description": "Message error is required if status is Error.",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusFinalize"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineAnalysisModel": {
         "type": "object",
         "properties": {
           "method": {
@@ -230,125 +330,47 @@
         },
         "additionalProperties": false
       },
-      "ClassAnalyze": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "path": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LineAnalyze"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+      "StatusFinalize": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "description": "Define 0 to Error and 1 to Success.",
+        "format": "int32"
       },
-      "AnalysisControlFlowModel": {
+      "TokenErrorModelResponse": {
         "type": "object",
         "properties": {
-          "projectID": {
+          "error": {
             "type": "string",
             "nullable": true
           },
-          "classes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ClassAnalyze"
-            },
-            "nullable": true
-          },
-          "heuristic": {
-            "type": "string",
-            "nullable": true
-          },
-          "totalTests": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "failedTests": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AnalysisControlFlowNewModel": {
-        "type": "object",
-        "properties": {
-          "projectID": {
-            "type": "string",
-            "nullable": true
-          },
-          "classes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ClassAnalyze"
-            },
-            "nullable": true
-          },
-          "heuristic": {
-            "type": "string",
-            "nullable": true
-          },
-          "totalTests": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "failedTests": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorModel": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "message": {
+          "error_description": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ErrorsModel": {
+      "TokenModelResponse": {
         "type": "object",
         "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorModel"
-            },
+          "access_token": {
+            "type": "string",
             "nullable": true
           },
-          "dateTimeError": {
+          "token_type": {
             "type": "string",
-            "format": "date-time",
-            "readOnly": true
+            "nullable": true
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

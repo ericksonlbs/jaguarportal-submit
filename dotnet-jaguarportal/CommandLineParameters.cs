@@ -7,11 +7,11 @@ namespace dotnet_jaguarportal
         [Option('p', "projectKey", Required = true, HelpText = "Set Project Key from your project in JaguarPortal.")]
         public string? ProjectKey { get; set; }
 
-        [Option('n', "projectName", Required = true, HelpText = "Set Project Name from your project in JaguarPortal.")]
-        public string? ProjectName { get; set; }
-
-        [Option('k', "apiKey", Required = true, HelpText = "Set ApiKey from your account in JaguarPortal.")]
-        public string? ApiKey { get; set; }
+        [Option('i', "clientId", Required = true, HelpText = "Set Client ID from your account in JaguarPortal.")]
+        public string? ClientId { get; set; }
+        
+        [Option('s', "clientSecret", Required = true, HelpText = "Set Client Secret from your account in JaguarPortal.")]
+        public string? ClientSecret { get; set; }
 
         [Option('h', "hostUrl", Required = true, HelpText = "Set Host URL from your published JaguarPortal.")]
         public string? HostUrl { get; set; }

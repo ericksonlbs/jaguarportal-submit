@@ -43,4 +43,9 @@
     </OpenApiReference>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="JaguarPortal\Services\" />
+  </ItemGroup>
+
 </Project>

@@ -9,6 +9,6 @@ namespace dotnet_jaguarportal.Interfaces
    
     public interface IJaguarPortalConverter<T>
     {
-        public AnalysisControlFlowNewModel Convert(T model, string projectID);
+        public Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> Convert(T model, string projectKey);
     }
 }
