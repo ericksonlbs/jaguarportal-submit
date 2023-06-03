@@ -16,8 +16,8 @@ inputs:
   jaguarPortalClientSecret:
     description: "The Client Secret from Jaguar Portal"
     required: true
-  jaguarPortalAnalisysPath:
-    description: "The analisys path"
+  jaguarPortalAnalysisPath:
+    description: "The analysis path"
     required: true
     default: /target
   jaguarPortalSourcePath:
