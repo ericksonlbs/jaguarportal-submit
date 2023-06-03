@@ -76,7 +76,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
         private void Notice(string url, Jaguar2Model obj)
         {
             List<KeyValuePair<decimal, string>> notices = new List<KeyValuePair<decimal, string>>();
-            Console.WriteLine($"::notice title=Jaguar Portal Analysis::{url}</a>");
+            Console.WriteLine($"::notice title=Jaguar Portal Analysis::{url}");
 
             foreach (var @class in obj.Classes)
             {
