@@ -89,7 +89,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             }
 
             foreach (var notice in notices.OrderByDescending(x => x.Key))
-                Console.WriteLine(notice);
+                Console.WriteLine(notice.Value);
         }
     }
 }
