@@ -6,15 +6,15 @@ inputs:
   jaguarPortalProjectKey:
     description: "The key of the Jaguar Portal project"
     required: true
-  jaguarPortalProjectName:
-    description: "The name of the Jaguar Portal project"
-    required: true
   jaguarPortalHostUrl:
     description: "The Jaguar Portal server URL"
     default: https://jaguarportalcloud.io
     required: true
-  jaguarPortalAPIKey:
-    description: "The APIKey from Jaguar Portal"
+  jaguarPortalClientId:
+    description: "The Client Id from Jaguar Portal"
+    required: true
+  jaguarPortalClientSecret:
+    description: "The Client Secret from Jaguar Portal"
     required: true
   jaguarPortalAnalisysPath:
     description: "The analisys path"
