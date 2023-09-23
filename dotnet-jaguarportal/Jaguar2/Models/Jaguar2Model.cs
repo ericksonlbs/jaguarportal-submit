@@ -12,23 +12,23 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false, ElementName ="sbfl")]
+    [System.Xml.Serialization.XmlRootAttribute(ElementName = "report", Namespace = "", IsNullable = false)]
     public partial class Jaguar2Model
     {
 
-        private sbflClass[] classField;
+        private reportPackage[] packageField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("class")]
-        public sbflClass[] Classes
+        [System.Xml.Serialization.XmlElementAttribute("package")]
+        public reportPackage[] package
         {
             get
             {
-                return this.classField;
+                return this.packageField;
             }
             set
             {
-                this.classField = value;
+                this.packageField = value;
             }
         }
     }
@@ -37,16 +37,56 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class sbflClass
+    public partial class reportPackage
     {
 
-        private sbflClassLine[] lineField;
+        private reportPackageSourcefile[] sourcefileField;
+
+        private string nameField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sourcefile")]
+        public reportPackageSourcefile[] sourcefile
+        {
+            get
+            {
+                return this.sourcefileField;
+            }
+            set
+            {
+                this.sourcefileField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class reportPackageSourcefile
+    {
+
+        private reportPackageSourcefileLine[] lineField;
 
         private string nameField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("line")]
-        public sbflClassLine[] Lines
+        public reportPackageSourcefileLine[] line
         {
             get
             {
@@ -77,7 +117,7 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class sbflClassLine
+    public partial class reportPackageSourcefileLine
     {
 
         private int nrField;
@@ -163,8 +203,8 @@ namespace dotnet_jaguarportal.Jaguar2.Models
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("susp")]
-        public decimal SuspiciousnessValue
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public decimal susp
         {
             get
             {
