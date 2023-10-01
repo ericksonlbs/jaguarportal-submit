@@ -2,7 +2,7 @@
 
 namespace dotnet_jaguarportal
 {
-    internal class CommandLineParameters
+    public class CommandLineParameters
     {
         [Option('p', "projectKey", Required = true, HelpText = "Set Project Key from your project in JaguarPortal.")]
         public string? ProjectKey { get; set; }

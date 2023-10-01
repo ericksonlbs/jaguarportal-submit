@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace dotnet_jaguarportal.Jaguar2.Services
 {
-    internal class Jaguar2Converter : IJaguarPortalConverter<Jaguar2Model>
+    public class Jaguar2Converter : IJaguarPortalConverter<Jaguar2Model>
     {
         private readonly CommandLineParameters _parameters;
         private readonly ILogger<Jaguar2Converter> _logger;
@@ -20,6 +20,16 @@ namespace dotnet_jaguarportal.Jaguar2.Services
 
         public Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> Convert(Jaguar2Model model, string projectKey)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (string.IsNullOrEmpty(projectKey))
+            {
+                throw new ArgumentException($"'{nameof(projectKey)}' cannot be null or empty.", nameof(projectKey));
+            }
+
             AnalysisControlFlowModel analysisControlFlow = new AnalysisControlFlowModel()
             {
                 ProjectKey = projectKey,
