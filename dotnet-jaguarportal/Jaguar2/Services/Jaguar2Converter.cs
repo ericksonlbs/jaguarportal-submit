@@ -3,6 +3,7 @@ using dotnet_jaguarportal.Jaguar2.Models;
 using dotnet_jaguarportal.JaguarPortal.Models;
 using Microsoft.Extensions.Logging;
 using System.Reflection.Metadata.Ecma335;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace dotnet_jaguarportal.Jaguar2.Services
 {
@@ -55,10 +56,10 @@ namespace dotnet_jaguarportal.Jaguar2.Services
                         {
                             myClass.Lines.Add(new LineAnalysisModel()
                             {
-                                Cef = line.cef,
+                                Cef = model.tests.fail - line.cef,
                                 Cep = line.cep,
                                 Cnf = line.cnf,
-                                Cnp = line.cnp,
+                                Cnp = model.tests.pass - line.cep,
                                 NumberLine = line.nr,
                                 SuspiciousValue = double.Parse(line.susp.ToString()),
                                 Method = getMethod(item.name, line.nr)

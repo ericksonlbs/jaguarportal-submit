@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace dotnet_jaguarportal.Jaguar2.Models
 {
-
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
     /// <remarks/>
     [System.SerializableAttribute()]
@@ -29,6 +28,22 @@ namespace dotnet_jaguarportal.Jaguar2.Models
             set
             {
                 this.packageField = value;
+            }
+        }
+
+        private reportTests testsField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("tests")]
+        public reportTests tests
+        {
+            get
+            {
+                return this.testsField;
+            }
+            set
+            {
+                this.testsField = value;
             }
         }
     }
@@ -213,6 +228,48 @@ namespace dotnet_jaguarportal.Jaguar2.Models
             set
             {
                 this.suspField = value;
+            }
+        }
+    }
+
+
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class reportTests
+    {
+
+        private byte failField;
+
+        private byte passField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public byte fail
+        {
+            get
+            {
+                return this.failField;
+            }
+            set
+            {
+                this.failField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public byte pass
+        {
+            get
+            {
+                return this.passField;
+            }
+            set
+            {
+                this.passField = value;
             }
         }
     }
