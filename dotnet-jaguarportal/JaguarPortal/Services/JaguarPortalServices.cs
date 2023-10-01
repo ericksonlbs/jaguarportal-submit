@@ -59,7 +59,8 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
 
                         if (obj != null)
                         {
-                            var analysis = converterXML.Convert(obj, parameters.ProjectKey);
+                            var analysis = converterXML.Convert(obj, parameters.ProjectKey, parameters.Repository, parameters.Provider,
+                                parameters.PullRequestNumber, parameters.PullRequestBranch, parameters.PullRequestBase);
 
                             var response = await _client.AnalyzesAsync(analysis.Item1);
 

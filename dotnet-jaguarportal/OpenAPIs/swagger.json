@@ -254,6 +254,26 @@
           "testsPass": {
             "type": "integer",
             "format": "int32"
+          },
+          "provider": {
+            "type": "string",
+            "nullable": true
+          },
+          "repository": {
+            "type": "string",
+            "nullable": true
+          },
+          "pullRequestBase": {
+            "type": "string",
+            "nullable": true
+          },
+          "pullRequestBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "pullRequestNumber": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

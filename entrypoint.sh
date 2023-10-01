@@ -65,7 +65,7 @@ echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -i \"${INPUT_JAGUARPORTALCLIENTID}\" -s \"${INPUT_JAGUARPORTALCLIENTSECRET}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALYSISPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALSOURCEPATH\"  -l \"$INPUT_JAGUARPORTALSOURCEPATH\" -f \"XML\" --prBranch=$GITHUB_HEAD_REF --prBase=$GITHUB_BASE_REF --prRepo=$GITHUB_REPOSITORY --prProvider=github "
+jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -i \"${INPUT_JAGUARPORTALCLIENTID}\" -s \"${INPUT_JAGUARPORTALCLIENTSECRET}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALYSISPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALSOURCEPATH\"  -l \"$INPUT_JAGUARPORTALSOURCEPATH\" --repo=\"$GITHUB_REPOSITORY\" --provider=github "
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
@@ -74,13 +74,12 @@ if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     # prKey	                Unique identifier of your PR. Must correspond to the key of the PR in GitHub or TFS. E.G.: 5
     # prBranch	            The name of your PR Ex: feature/my-new-feature
     # prBase	            The long-lived branch into which the PR will be merged. Default: master E.G.: master
-    # prRepo                SLUG of the GitHub Repo (owner/repo)
 
     # Extract Pull Request numer from the GITHUB_REF variable
     PR_NUMBER=$(echo "$GITHUB_REF" | awk 'BEGIN { FS = "/" } ; { print $3 }')
 
     # Add pull request specific parameters
-    jaguarportal_cmd="$jaguarportal_cmd --prKey=$PR_NUMBER"
+    jaguarportal_cmd="$jaguarportal_cmd --prKey=\"$PR_NUMBER\" --prBranch=\"$GITHUB_HEAD_REF\" --prBase=\"$GITHUB_BASE_REF\" "
 
 fi
 

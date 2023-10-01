@@ -19,7 +19,13 @@ namespace dotnet_jaguarportal.Jaguar2.Services
             _logger = logger;
         }
 
-        public Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> Convert(Jaguar2Model model, string projectKey)
+        public Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> Convert(Jaguar2Model? model,
+            string? projectKey,
+            string? repository,
+            string? provider,
+            string? pullRequestNumber,
+            string? pullRequestBranch,
+            string? pullRequestBase)
         {
             if (model is null)
             {
@@ -31,11 +37,26 @@ namespace dotnet_jaguarportal.Jaguar2.Services
                 throw new ArgumentException($"'{nameof(projectKey)}' cannot be null or empty.", nameof(projectKey));
             }
 
-            AnalysisControlFlowModel analysisControlFlow = new AnalysisControlFlowModel()
+            if (string.IsNullOrEmpty(repository))
+            {
+                throw new ArgumentException($"'{nameof(repository)}' cannot be null or empty.", nameof(repository));
+            }
+
+            if (string.IsNullOrEmpty(provider))
+            {
+                throw new ArgumentException($"'{nameof(provider)}' cannot be null or empty.", nameof(provider));
+            }
+
+            AnalysisControlFlowModel analysisControlFlow = new()
             {
                 ProjectKey = projectKey,
                 TestsFail = model?.tests?.fail ?? 0,
-                TestsPass = model?.tests?.pass ?? 0
+                TestsPass = model?.tests?.pass ?? 0,
+                Provider = provider,
+                PullRequestBase = pullRequestBase,
+                PullRequestBranch = pullRequestBranch,
+                PullRequestNumber = pullRequestNumber,
+                Repository = repository
             };
             List<ClassAnalysisModel> classes = new List<ClassAnalysisModel>();
 
