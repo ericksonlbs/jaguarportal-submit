@@ -241,13 +241,13 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     public partial class reportTests
     {
 
-        private byte failField;
+        private int failField;
 
-        private byte passField;
+        private int passField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte fail
+        public int fail
         {
             get
             {
@@ -261,7 +261,7 @@ namespace dotnet_jaguarportal.Jaguar2.Models
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte pass
+        public int pass
         {
             get
             {
