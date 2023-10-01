@@ -15,23 +15,30 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
         private readonly IJaguarPortalConverter<Jaguar2Model> converterXML;
         private readonly CommandLineParameters? parameters;
 
-        public JaguarPortalService(IHttpClientFactory httpClientFactory, IJaguarPortalConverter<Jaguar2Model> converterXML, CommandLineParameters parameters)
+        /// <summary>
+        /// Jaguar Portal Service
+        /// </summary>
+        /// <param name="httpClientFactory">httpClientFactory to connection with Jaguar Portal</param>
+        /// <param name="converterXML">Converter</param>
+        /// <param name="parameters">Command Line Parameters</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public JaguarPortalService(IHttpClientFactory httpClientFactory,
+                                    IJaguarPortalConverter<Jaguar2Model> converterXML,
+                                    CommandLineParameters parameters)
         {
-            if (parameters == null)
-            {
-                return;
-            }
             this.converterXML = converterXML ?? throw new ArgumentNullException(nameof(converterXML));
             this.parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
 
             HttpClient httpClient = httpClientFactory.CreateClient();
-            httpClient.BaseAddress = new Uri(parameters?.HostUrl);
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+
+            if (parameters.HostUrl != null)
+                httpClient.BaseAddress = new Uri(parameters.HostUrl);
 
             if (parameters.ClientId != null && parameters.ClientSecret != null)
                 httpClient.GenerateAccessToken(parameters.ClientId, parameters.ClientSecret);
 
             _client = new swaggerClient(parameters?.HostUrl, httpClient);
+
         }
 
         public async Task SendAnalisysControlFlow()
@@ -47,7 +54,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(Jaguar2Model));
 
-                        Jaguar2Model obj = (Jaguar2Model)serializer.Deserialize(xmlReader);
+                        Jaguar2Model? obj = serializer.Deserialize(xmlReader) as Jaguar2Model;
 
 
                         if (obj != null)
@@ -55,6 +62,9 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                             var analysis = converterXML.Convert(obj, parameters.ProjectKey);
 
                             var response = await _client.AnalyzesAsync(analysis.Item1);
+
+                            if (parameters.HostUrl == null)
+                                return;
 
                             string url = string.Concat(parameters.HostUrl, parameters.HostUrl.EndsWith("/") ? "" : "/", "Analyzes/Detail/", response.Id);
 
@@ -86,16 +96,24 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             List<KeyValuePair<decimal, string>> notices = new List<KeyValuePair<decimal, string>>();
             Console.WriteLine($"::notice title=Jaguar Portal Analysis::{url}");
 
-            foreach (var package in obj?.package)
+            if (obj.package != null)
             {
-                foreach (var sourceFile in package?.sourcefile)
+                foreach (var package in obj.package)
                 {
-                    if (sourceFile.line != null)
-                        foreach (reportPackageSourcefileLine line in sourceFile.line)
+                    if (package.sourcefile != null)
+                    {
+                        foreach (var sourceFile in package.sourcefile)
                         {
-                            string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name}.java - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name}.java CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
-                            notices.Add(new KeyValuePair<decimal, string>(line.susp, notice));
+                            if (sourceFile.line != null)
+                            {
+                                foreach (reportPackageSourcefileLine line in sourceFile.line)
+                                {
+                                    string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name}.java - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name}.java CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
+                                    notices.Add(new KeyValuePair<decimal, string>(line.susp, notice));
+                                }
+                            }
                         }
+                    }
                 }
             }
 

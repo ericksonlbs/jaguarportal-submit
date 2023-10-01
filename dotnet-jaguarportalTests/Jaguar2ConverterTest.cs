@@ -1,5 +1,6 @@
 using System.Xml.Serialization;
 using System.Xml;
+using NuGet.Frameworks;
 
 namespace dotnet_jaguarportalTests
 {
@@ -36,6 +37,7 @@ namespace dotnet_jaguarportalTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullModel()
         {
+            Assert.IsNotNull(converter);            
             _ = converter.Convert(null, "123456");
         }
 
@@ -43,6 +45,7 @@ namespace dotnet_jaguarportalTests
         [ExpectedException(typeof(ArgumentException))]
         public void EmptyProject()
         {
+            Assert.IsNotNull(converter);                
             _ = converter.Convert(new Jaguar2Model(), string.Empty);
         }
 
@@ -50,6 +53,7 @@ namespace dotnet_jaguarportalTests
         [ExpectedException(typeof(ArgumentException))]
         public void NullProject()
         {
+            Assert.IsNotNull(converter);
             _ = converter.Convert(new Jaguar2Model(), null);
         }
 
@@ -61,9 +65,13 @@ namespace dotnet_jaguarportalTests
         {
             using XmlReader xmlReader = XmlReader.Create(Path.Combine("FileTests", "csv1b", "jaguar2.xml"));
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Jaguar2Model));
+            XmlSerializer serializer = new(typeof(Jaguar2Model));
 
-            Jaguar2Model? jaguar2Model = (Jaguar2Model)serializer.Deserialize(xmlReader);
+            Jaguar2Model? jaguar2Model = serializer.Deserialize(xmlReader) as Jaguar2Model;
+
+            Assert.IsNotNull(converter);                
+
+            Assert.IsNotNull(jaguar2Model);
 
             Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> result = converter.Convert(jaguar2Model, "123456");
 
@@ -74,9 +82,10 @@ namespace dotnet_jaguarportalTests
             Assert.AreEqual(53, result.Item1.TestsPass, nameof(result.Item1.TestsPass));
             Assert.AreEqual(1, result.Item1.TestsFail, nameof(result.Item1.TestsFail));
 
-            Assert.IsNotNull(result.Item2);
 
             IEnumerable<ClassAnalysisModel> itens = result.Item2;
+            
+            Assert.IsNotNull(itens);
 
             //source files
             Assert.AreEqual(7, itens.Count(), "Count files");

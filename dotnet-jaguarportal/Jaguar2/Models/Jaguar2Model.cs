@@ -15,11 +15,11 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     public partial class Jaguar2Model
     {
 
-        private reportPackage[] packageField;
+        private reportPackage[]? packageField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("package")]
-        public reportPackage[] package
+        public reportPackage[]? package
         {
             get
             {
@@ -31,11 +31,11 @@ namespace dotnet_jaguarportal.Jaguar2.Models
             }
         }
 
-        private reportTests testsField;
+        private reportTests? testsField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("tests")]
-        public reportTests tests
+        public reportTests? tests
         {
             get
             {
@@ -55,13 +55,13 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     public partial class reportPackage
     {
 
-        private reportPackageSourcefile[] sourcefileField;
+        private reportPackageSourcefile[]? sourcefileField;
 
-        private string nameField;
+        private string? nameField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("sourcefile")]
-        public reportPackageSourcefile[] sourcefile
+        public reportPackageSourcefile[]? sourcefile
         {
             get
             {
@@ -75,7 +75,7 @@ namespace dotnet_jaguarportal.Jaguar2.Models
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name
+        public string? name
         {
             get
             {
@@ -95,13 +95,13 @@ namespace dotnet_jaguarportal.Jaguar2.Models
     public partial class reportPackageSourcefile
     {
 
-        private reportPackageSourcefileLine[] lineField;
+        private reportPackageSourcefileLine[]? lineField;
 
-        private string nameField;
+        private string? nameField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("line")]
-        public reportPackageSourcefileLine[] line
+        public reportPackageSourcefileLine[]? line
         {
             get
             {
@@ -115,7 +115,7 @@ namespace dotnet_jaguarportal.Jaguar2.Models
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name
+        public string? name
         {
             get
             {
