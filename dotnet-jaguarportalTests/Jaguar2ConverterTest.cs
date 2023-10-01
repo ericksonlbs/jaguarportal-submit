@@ -59,7 +59,7 @@ namespace dotnet_jaguarportalTests
         [TestMethod("Validate XML Converter to API Format")]
         public void ConvertValidate()
         {
-            using XmlReader xmlReader = XmlReader.Create(Path.Combine("FileTests", "csv1b", "Jaguar2.xml"));
+            using XmlReader xmlReader = XmlReader.Create(Path.Combine("FileTests", "csv1b", "jaguar2.xml"));
 
             XmlSerializer serializer = new XmlSerializer(typeof(Jaguar2Model));
 
