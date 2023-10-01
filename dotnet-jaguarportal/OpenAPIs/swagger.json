@@ -246,6 +246,14 @@
           "projectKey": {
             "type": "string",
             "nullable": true
+          },
+          "testsFail": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "testsPass": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
