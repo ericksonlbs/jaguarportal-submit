@@ -22,7 +22,9 @@ namespace dotnet_jaguarportal.Jaguar2.Services
         {
             AnalysisControlFlowModel analysisControlFlow = new AnalysisControlFlowModel()
             {
-                ProjectKey = projectKey
+                ProjectKey = projectKey,
+                TestsFail = model.tests.fail,
+                TestsPass = model.tests.pass
             };
             List<ClassAnalysisModel> classes = new List<ClassAnalysisModel>();
 
@@ -56,9 +58,9 @@ namespace dotnet_jaguarportal.Jaguar2.Services
                         {
                             myClass.Lines.Add(new LineAnalysisModel()
                             {
-                                Cef = model.tests.fail - line.cef,
+                                Cef = line.cef,
                                 Cep = line.cep,
-                                Cnf = line.cnf,
+                                Cnf = model.tests.fail - line.cef,
                                 Cnp = model.tests.pass - line.cep,
                                 NumberLine = line.nr,
                                 SuspiciousValue = double.Parse(line.susp.ToString()),
