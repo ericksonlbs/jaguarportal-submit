@@ -71,7 +71,7 @@ jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPOR
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     # JaguarPortal wants these variables if build is started for a pull request
     # JaguarPortal parameters: https://github.com/ericksonlbs/JaguarPortal/wiki/API-Documentation/
-    # prKey	                Unique identifier of your PR. Must correspond to the key of the PR in GitHub or TFS. E.G.: 5
+    # prNumber	                Unique identifier of your PR. Must correspond to the key of the PR in GitHub or TFS. E.G.: 5
     # prBranch	            The name of your PR Ex: feature/my-new-feature
     # prBase	            The long-lived branch into which the PR will be merged. Default: master E.G.: master
 
@@ -79,7 +79,7 @@ if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     PR_NUMBER=$(echo "$GITHUB_REF" | awk 'BEGIN { FS = "/" } ; { print $3 }')
 
     # Add pull request specific parameters
-    jaguarportal_cmd="$jaguarportal_cmd --prKey=\"$PR_NUMBER\" --prBranch=\"$GITHUB_HEAD_REF\" --prBase=\"$GITHUB_BASE_REF\" "
+    jaguarportal_cmd="$jaguarportal_cmd --prNumber=\"$PR_NUMBER\" --prBranch=\"$GITHUB_HEAD_REF\" --prBase=\"$GITHUB_BASE_REF\" "
 
 fi
 
