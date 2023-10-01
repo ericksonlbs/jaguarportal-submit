@@ -37,16 +37,16 @@ namespace dotnet_jaguarportalTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullModel()
         {
-            Assert.IsNotNull(converter);            
-            _ = converter.Convert(null, "123456");
+            Assert.IsNotNull(converter);
+            _ = converter.Convert(null, "123456", null, null, null, null, null);
         }
 
         [TestMethod("Empty project")]
         [ExpectedException(typeof(ArgumentException))]
         public void EmptyProject()
         {
-            Assert.IsNotNull(converter);                
-            _ = converter.Convert(new Jaguar2Model(), string.Empty);
+            Assert.IsNotNull(converter);
+            _ = converter.Convert(new Jaguar2Model(), string.Empty, null, null, null, null, null);
         }
 
         [TestMethod("Null project")]
@@ -54,7 +54,7 @@ namespace dotnet_jaguarportalTests
         public void NullProject()
         {
             Assert.IsNotNull(converter);
-            _ = converter.Convert(new Jaguar2Model(), null);
+            _ = converter.Convert(new Jaguar2Model(), null, null, null, null, null, null);
         }
 
         /// <summary>
@@ -69,11 +69,12 @@ namespace dotnet_jaguarportalTests
 
             Jaguar2Model? jaguar2Model = serializer.Deserialize(xmlReader) as Jaguar2Model;
 
-            Assert.IsNotNull(converter);                
+            Assert.IsNotNull(converter);
 
             Assert.IsNotNull(jaguar2Model);
 
-            Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> result = converter.Convert(jaguar2Model, "123456");
+            Tuple<AnalysisControlFlowModel, IEnumerable<ClassAnalysisModel>> result = 
+                converter.Convert(jaguar2Model, "123456", "ericksonlbs/csv1b", "github", null, null, null);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Item1);
@@ -84,7 +85,7 @@ namespace dotnet_jaguarportalTests
 
 
             IEnumerable<ClassAnalysisModel> itens = result.Item2;
-            
+
             Assert.IsNotNull(itens);
 
             //source files
