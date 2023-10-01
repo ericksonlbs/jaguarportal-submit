@@ -103,7 +103,7 @@ namespace dotnet_jaguarportalTests
             Assert.AreEqual(result.Item1.TestsPass - itens.Skip(0).First().Lines.First().Cep, itens.Skip(0).First().Lines.First().Cnp, "CNP, CSVFormat.java, first item");
             Assert.AreEqual(0.218218, itens.Skip(0).First().Lines.First().SuspiciousValue, "SuspiciousValue in CSVFormat.java, first item");
 
-            byte[] file = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, "FileTests", "csv1b", "org", "apache", "commons", "csv", "CsvFormat.java"));
+            byte[] file = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, "FileTests", "csv1b", "org", "apache", "commons", "csv", "CSVFormat.java"));
 
             Assert.AreEqual(file.LongLength, itens.Skip(0).First().Code.LongLength, "Codefile CSVFormat.java");
         }
