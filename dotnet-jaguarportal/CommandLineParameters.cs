@@ -39,5 +39,14 @@ namespace dotnet_jaguarportal
 
         [Option('t', "pathTarget", Required = true, HelpText = "Set path target classes.")]
         public string? PathTarget { get; set; }
+
+        [Option("botAccessToken", Required = false, HelpText = "Set access token to bot write comment.")]
+        public string? BotAccessToken { get; set; }
+
+        [Option("runId", Required = false, HelpText = "Set run id from github run CI/CD")]
+        public string? RunId { get; set; }
+
+        [Option("runNumber", Required = false, HelpText = "Set run number from github run CI/CD")]
+        public string? RunNumber { get; set; }
     }
 }

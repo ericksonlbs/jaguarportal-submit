@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 
 LABEL "com.github.actions.name"="jaguarportal-submit"
-LABEL "com.github.actions.description"="Submit result analysis SBFL to Jaguar Portal."
+LABEL "com.github.actions.description"="Submit result analysis SBFL to Jaguar Portal and report on GitHub Action and Pull Request"
 LABEL "com.github.actions.icon"="check-square"
 LABEL "com.github.actions.color"="blue"
 
