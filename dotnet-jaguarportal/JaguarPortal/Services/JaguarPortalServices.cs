@@ -78,11 +78,12 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                             if (parameters?.Provider?.ToLowerInvariant() == "github" &&
                                 !string.IsNullOrWhiteSpace(parameters?.Repository) &&
                                 !string.IsNullOrWhiteSpace(parameters?.PullRequestNumber) &&
-                                !string.IsNullOrWhiteSpace(parameters?.RunNumber) &&
+                                !string.IsNullOrWhiteSpace(parameters?.RunAttempt) &&
                                 !string.IsNullOrWhiteSpace(parameters?.RunId) &&
+                                !string.IsNullOrWhiteSpace(parameters?.BotAccessToken) &&
                                     int.TryParse(parameters.PullRequestNumber, out var prNumber))
                             {
-                              await  AddPullRequestComment(url, obj, parameters.Repository, prNumber, parameters.RunId, parameters.RunNumber);
+                              await  AddPullRequestComment(url, obj, parameters.Repository, prNumber, parameters.RunId, parameters.RunAttempt);
                             }
 
                             try
@@ -106,11 +107,11 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             }
         }
 
-        private async Task AddPullRequestComment(string url, Jaguar2Model obj, string repo, int prNumber, string runId, string runNumber)
+        private async Task AddPullRequestComment(string url, Jaguar2Model obj, string repo, int prNumber, string runId, string runAttempt)
         {
             List<KeyValuePair<decimal, string>> notices = new List<KeyValuePair<decimal, string>>();
             StringBuilder sb = new();
-            sb.AppendLine($"Action Failure - <a href='https://github.com/{repo}/actions/runs/{runId}/attempts/{runNumber}' target='_blank'>https://github.com/{repo}/actions/runs/{runId}/attempts/{runNumber}</a>");
+            sb.AppendLine($"Action Failure - <a href='https://github.com/{repo}/actions/runs/{runId}/attempts/{runAttempt}' target='_blank'>https://github.com/{repo}/actions/runs/{runId}/attempts/{runAttempt}</a>");
             sb.AppendLine();
 
             sb.AppendLine($"Jaguar Portal Analysis - <a href='{url}' target='_blank'>{url}  </a>");

@@ -2,7 +2,7 @@
   "profiles": {
     "dotnet-jaguarportal": {
       "commandName": "Project",
-      "commandLineArgs": "-p 2b02e0d1-e8ac-4b70-80e2-50fe3ff9c6ee -l C:\\temp\\projects -h \"https://localhost:44322/\" -j C:\\git\\ericksonlbs\\Csv1b\\target -t C:\\git\\ericksonlbs\\Csv1b\\src\\main\\java -i EA56CEC7E76D8E9EB1CBE226882321FB -s A770D947093FBCB004A419791D480D07F46F83E87DD2667755D4E90A827AD173  --prNumber=1 --prBranch=test --prBase=main --repo=ericksonlbs/IMC --provider=github --botAccessToken=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 --runId=6371034232 --runNumber=4"
+      "commandLineArgs": "-p 2b02e0d1-e8ac-4b70-80e2-50fe3ff9c6ee -l C:\\temp\\projects -h \"https://localhost:44322/\" -j C:\\git\\ericksonlbs\\Csv1b\\target -t C:\\git\\ericksonlbs\\Csv1b\\src\\main\\java -i EA56CEC7E76D8E9EB1CBE226882321FB -s A770D947093FBCB004A419791D480D07F46F83E87DD2667755D4E90A827AD173  --prNumber=3 --prBranch=test2 --prBase=main --repo=ericksonlbs/IMC --provider=github --botAccessToken=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 --runId=6441919697 --runAttempt=9"
     }
   }
 }
