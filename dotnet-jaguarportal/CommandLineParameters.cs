@@ -46,7 +46,7 @@ namespace dotnet_jaguarportal
         [Option("runId", Required = false, HelpText = "Set run id from github run CI/CD")]
         public string? RunId { get; set; }
 
-        [Option("runNumber", Required = false, HelpText = "Set run number from github run CI/CD")]
-        public string? RunNumber { get; set; }
+        [Option("runAttempt", Required = false, HelpText = "Set run attempt from github run CI/CD")]
+        public string? RunAttempt { get; set; }
     }
 }
