@@ -1,6 +1,8 @@
-﻿using dotnet_jaguarportal.Interfaces;
+﻿using dotnet_jaguarportal.GitHub.Services;
+using dotnet_jaguarportal.Interfaces;
 using dotnet_jaguarportal.Jaguar2.Models;
 using dotnet_jaguarportal.JaguarPortal.Interfaces;
+using Octokit;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -14,6 +16,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
         private readonly swaggerClient _client;
         private readonly IJaguarPortalConverter<Jaguar2Model> converterXML;
         private readonly CommandLineParameters? parameters;
+        private readonly IGitHubService gitHubService;
 
         /// <summary>
         /// Jaguar Portal Service
@@ -24,11 +27,12 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
         /// <exception cref="ArgumentNullException"></exception>
         public JaguarPortalService(IHttpClientFactory httpClientFactory,
                                     IJaguarPortalConverter<Jaguar2Model> converterXML,
-                                    CommandLineParameters parameters)
+                                    CommandLineParameters parameters,
+                                    IGitHubService gitHubService)
         {
             this.converterXML = converterXML ?? throw new ArgumentNullException(nameof(converterXML));
             this.parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
-
+            this.gitHubService = gitHubService ?? throw new ArgumentNullException(nameof(gitHubService));
             HttpClient httpClient = httpClientFactory.CreateClient();
 
             if (parameters.HostUrl != null)
@@ -70,6 +74,17 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                             string url = string.Concat(parameters.HostUrl, parameters.HostUrl.EndsWith("/") ? "" : "/", "Analyzes/Detail/", response.Id);
 
                             Notice(url, obj);
+
+                            if (parameters?.Provider?.ToLowerInvariant() == "github" &&
+                                !string.IsNullOrWhiteSpace(parameters?.Repository) &&
+                                !string.IsNullOrWhiteSpace(parameters?.PullRequestNumber) &&
+                                !string.IsNullOrWhiteSpace(parameters?.RunNumber) &&
+                                !string.IsNullOrWhiteSpace(parameters?.RunId) &&
+                                    int.TryParse(parameters.PullRequestNumber, out var prNumber))
+                            {
+                              await  AddPullRequestComment(url, obj, parameters.Repository, prNumber, parameters.RunId, parameters.RunNumber);
+                            }
+
                             try
                             {
                                 foreach (var @class in analysis.Item2)
@@ -91,9 +106,51 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
             }
         }
 
+        private async Task AddPullRequestComment(string url, Jaguar2Model obj, string repo, int prNumber, string runId, string runNumber)
+        {
+            List<KeyValuePair<decimal, string>> notices = new List<KeyValuePair<decimal, string>>();
+            StringBuilder sb = new();
+            sb.AppendLine($"Action Failure - <a href='https://github.com/{repo}/actions/runs/{runId}/attempts/{runNumber}' target='_blank'>https://github.com/{repo}/actions/runs/{runId}/attempts/{runNumber}</a>");
+            sb.AppendLine();
+
+            sb.AppendLine($"Jaguar Portal Analysis - <a href='{url}' target='_blank'>{url}  </a>");
+            sb.AppendLine();
+
+            sb.AppendLine("<b>Suspiciousness</b>");
+
+            if (obj.package != null)
+            {
+                foreach (var package in obj.package)
+                {
+                    if (package.sourcefile != null)
+                    {
+                        foreach (var sourceFile in package.sourcefile)
+                        {
+                            if (sourceFile.line != null)
+                            {
+                                foreach (reportPackageSourcefileLine line in sourceFile.line)
+                                {
+                                    string notice = $"- {line.susp:0.0000} - {package?.name}/{sourceFile.name}:{line.nr}";
+                                    notices.Add(new KeyValuePair<decimal, string>(line.susp, notice));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            foreach (var notice in notices.OrderByDescending(x => x.Key))
+                sb.AppendLine(notice.Value);
+                        
+            IssueComment? ret = await gitHubService.CreateCommentPullRequest(repo.Split("/")[0], repo.Split("/")[1], prNumber, sb.ToString());
+            if (ret != null)
+            {
+                Console.WriteLine($"Created comment: {ret.HtmlUrl}");
+            }
+        }
 
         private void Notice(string url, Jaguar2Model obj)
-        {
+        {            
             List<KeyValuePair<decimal, string>> notices = new List<KeyValuePair<decimal, string>>();
             Console.WriteLine($"::notice title=Jaguar Portal Analysis::{url}");
 
@@ -109,7 +166,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                             {
                                 foreach (reportPackageSourcefileLine line in sourceFile.line)
                                 {
-                                    string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name}.java - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name}.java CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
+                                    string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name} - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name}.java CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
                                     notices.Add(new KeyValuePair<decimal, string>(line.susp, notice));
                                 }
                             }

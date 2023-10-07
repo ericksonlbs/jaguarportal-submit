@@ -1,5 +1,5 @@
 name: "jaguarportal-submit"
-description: "Submit result analysis SBFL to Jaguar Portal"
+description: "Submit result analysis SBFL to Jaguar Portal and report on GitHub Action and Pull Request"
 author: "ericksonlbs"
 
 inputs:
@@ -24,6 +24,9 @@ inputs:
     description: "The source path"
     required: true
     default: /src/main/java
+  jaguarPortalGitHubAccessToken:
+    description: "GitHub Access Token to write comment in pull request"
+    required: false    
     
 runs:
   using: "docker"

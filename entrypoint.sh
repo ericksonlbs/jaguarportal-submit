@@ -65,7 +65,11 @@ echo "INPUT_JAGUARPORTALHOSTURL: $INPUT_JAGUARPORTALHOSTURL"
 #-----------------------------------
 # Send to JaguarPortal
 #-----------------------------------
-jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -i \"${INPUT_JAGUARPORTALCLIENTID}\" -s \"${INPUT_JAGUARPORTALCLIENTSECRET}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALYSISPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALSOURCEPATH\"  -l \"$INPUT_JAGUARPORTALSOURCEPATH\" --repo=\"$GITHUB_REPOSITORY\" --provider=github "
+jaguarportal_cmd="/root/.dotnet/tools/dotnet-jaguarportal -p \"${INPUT_JAGUARPORTALPROJECTKEY}\" -i \"${INPUT_JAGUARPORTALCLIENTID}\" -s \"${INPUT_JAGUARPORTALCLIENTSECRET}\" -h \"${INPUT_JAGUARPORTALHOSTURL}\" -j \"/github/workspace$INPUT_JAGUARPORTALANALYSISPATH\"  -t \"/github/workspace$INPUT_JAGUARPORTALSOURCEPATH\"  -l \"$INPUT_JAGUARPORTALSOURCEPATH\" --repo=\"$GITHUB_REPOSITORY\" --provider=github --runId=\"$GITHUB_RUN_ID\" --runNumber=\"$GITHUB_RUN_NUMBER\" "
+
+if [ ! -z "$INPUT_JAGUARPORTALGITHUBACCESSTOKEN" ]; then
+    jaguarportal_cmd="$jaguarportal_cmd --botAccessToken=\"${INPUT_JAGUARPORTALGITHUBACCESSTOKEN}\" "
+fi
 
 # Check Github environment variable GITHUB_EVENT_NAME to determine if this is a pull request or not. 
 if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
