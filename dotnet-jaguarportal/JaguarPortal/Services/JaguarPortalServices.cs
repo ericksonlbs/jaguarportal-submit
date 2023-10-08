@@ -167,7 +167,7 @@ namespace dotnet_jaguarportal.JaguarPortal.Services
                             {
                                 foreach (reportPackageSourcefileLine line in sourceFile.line)
                                 {
-                                    string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name} - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name}.java CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
+                                    string notice = $"::notice title={line.susp:0.0000} - {package?.name}/{sourceFile.name} - Line: {line.nr} (SBFL RANKING)::{parameters?.LocalPath}/{sourceFile.name} CEF:{line.cef} CEP:{line.cep} CNF:{line.cnf} CNP:{line.cnp}";
                                     notices.Add(new KeyValuePair<decimal, string>(line.susp, notice));
                                 }
                             }
