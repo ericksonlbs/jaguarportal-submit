@@ -96,7 +96,7 @@ You can also view the Pull Request conversation:
 ![image](https://github.com/user-attachments/assets/eaee7d35-2eb1-4717-a918-119b5357cf16)
 
 
-Or via the Jaguar Web Portal, where you can view SFL information together with the code, showing suspicious lines marked with colors ranging from green (least suspicious) to red (most suspicious):
+Or via the Jaguar Portal Web, where you can view SFL information together with the code, showing suspicious lines marked with colors ranging from green (least suspicious) to red (most suspicious):
 
 ![image](https://github.com/user-attachments/assets/b17237d8-a133-4513-952f-217334813492)
 
