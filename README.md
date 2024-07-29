@@ -88,7 +88,8 @@ After running a GitHub Action, if any test fails, Jaguar 2 will generate SFL dat
 
 The TOP 10 results can be viewed in Annotations itself, see an example:
 
-![image](https://github.com/user-attachments/assets/b61d3efb-ef73-4363-a566-d46d5c23342c)
+![image](https://github.com/user-attachments/assets/fca61507-2d23-44ef-955a-351748bd35ec)
+
 
 You can also view the Pull Request conversation:
 
@@ -97,4 +98,5 @@ You can also view the Pull Request conversation:
 
 Or via the Jaguar Web Portal, where you can view SFL information together with the code, showing suspicious lines marked with colors ranging from green (least suspicious) to red (most suspicious):
 
-![image](https://github.com/user-attachments/assets/9860004d-d8fa-4081-8d12-54c486ce6e28)
+![image](https://github.com/user-attachments/assets/b17237d8-a133-4513-952f-217334813492)
+
